@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   apim_rdbms:
     image: docker.wso2.com/apim-pattern6-mysql:5.5
