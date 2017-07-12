@@ -1,12 +1,12 @@
 version: '2'
 services:
-  apim_rdbms:
-    image: docker.wso2.com/apim-pattern6-mysql:5.5
-    build:
-        context: ../
-        dockerfile: pattern-6/database/Dockerfile
-    environment:
-        MYSQL_ROOT_PASSWORD: root
+  # apim_rdbms:
+  #   image: docker.wso2.com/apim-pattern6-mysql:5.5
+  #   build:
+  #       context: ../
+  #       dockerfile: pattern-6/database/Dockerfile
+  #   environment:
+  #       MYSQL_ROOT_PASSWORD: root
   analytics:
     image: docker.wso2.com/apim-pattern6-am-analytics:2.1.0
     build:
@@ -15,7 +15,9 @@ services:
     environment:
       - SLEEP=150
     ports:
-    - "9448:9444"
+      - "9448:9444"
+    networks:
+      - dockernet
   traffic-manager:
     image: docker.wso2.com/apim-pattern6-traffic-manager:2.1.0
     build:
@@ -24,7 +26,9 @@ services:
     environment:
       - SLEEP=60
     ports:
-    - "9447:9443"
+      - "9447:9443"
+    networks:
+      - dockernet
   keymanager:
     image: docker.wso2.com/apim-pattern6-keymanager:2.1.0
     build:
@@ -33,7 +37,9 @@ services:
     environment:
       - SLEEP=100
     ports:
-    - "9443:9443"
+      - "9443:9443"
+    networks:
+      - dockernet
   gateway-manager:
     image: docker.wso2.com/apim-pattern6-gateway-manager:2.1.0
     build:
@@ -42,7 +48,9 @@ services:
     environment:
       - SLEEP=150
     ports:
-    - "9444:9443"
+      - "9444:9443"
+    networks:
+      - dockernet
   gateway-worker:
     image: docker.wso2.com/apim-pattern6-gateway-worker:2.1.0
     build:
@@ -55,6 +63,8 @@ services:
     - "8243:8243"
     links:
       - gateway-manager
+    networks:
+      - dockernet
   publisher-store:
     image: docker.wso2.com/apim-pattern6-publisher-store:2.1.0
     build:
@@ -64,3 +74,9 @@ services:
       - SLEEP=230
     ports:
       - "9445:9443"
+    networks:
+      - dockernet
+
+networks:
+  dockernet:
+    external: true
