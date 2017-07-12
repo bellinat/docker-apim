@@ -55,6 +55,8 @@ services:
     - "8243:8243"
     links:
       - gateway-manager
+    deploy:
+      replicas: 5
   publisher-store:
     image: docker.wso2.com/apim-pattern6-publisher-store:2.1.0
     build:
