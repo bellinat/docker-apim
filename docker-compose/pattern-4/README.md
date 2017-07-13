@@ -25,7 +25,7 @@ This will deploy the following,
 
 Add the following entries to the /etc/hosts
 ```
-127.0.0.1 gateway-worker gateway-manager publisher.apim.wso2.com store.apim.wso2.com keymanager.apim.wso2.com trafficm.apim.wso2.com analytics.apim.wso2.com apim_rdbms
+127.0.0.1 gateway-worker gateway-manager publisher.apim.wso2.com store.apim.wso2.com keymanager.apim.wso2.com trafficm.apim.wso2.com analytics.apim.wso2.com jdbc:mysql://10.0.2.15:3306
 127.0.0.1 gateway-worker-2 gateway-manager-2
 ```
 

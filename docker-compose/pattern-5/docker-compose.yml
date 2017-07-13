@@ -1,7 +1,7 @@
 version: '2'
 services:
-  apim_rdbms:
-    image: docker.wso2.com/apim-pattern5-apim_rdbms:2.1.0
+  jdbc:mysql://10.0.2.15:3306:
+    image: docker.wso2.com/apim-pattern5-jdbc:mysql://10.0.2.15:3306:2.1.0
     build:
         context: ../
         dockerfile: pattern-5/database/Dockerfile

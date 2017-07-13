@@ -44,7 +44,7 @@ This will deploy the following,
 
 Add the following entries to the /etc/hosts
 ```
-127.0.0.1 api-manager is-key-manager apim_rdbms
+127.0.0.1 api-manager is-key-manager jdbc:mysql://10.0.2.15:3306
 ```
 If you are using docker machine, please use the docker machine IP instead of the local machine IP.
 

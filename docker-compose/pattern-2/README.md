@@ -48,7 +48,7 @@ Add the following entries to the /etc/hosts
 ```
 127.0.0.1 api-manager
 127.0.0.1 am-analytics 
-127.0.0.1 apim_rdbms 
+127.0.0.1 jdbc:mysql://10.0.2.15:3306 
 ```
 If you are using docker machine, please use the docker machine IP instead of the local machine IP.
 

@@ -1,6 +1,6 @@
 version: '2'
 services:
-  apim_rdbms:
+  jdbc:mysql://10.0.2.15:3306:
     image: docker.wso2.com/apim-pattern3-mysql:5.5
     build:
         context: ../
