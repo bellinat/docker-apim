@@ -43,6 +43,7 @@ services:
       - SLEEP=100
     ports:
       - "9443:9443"
+      - "666:8243"
     networks:
       - dockernet
 
