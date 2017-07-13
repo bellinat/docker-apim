@@ -41,7 +41,7 @@ services:
     ports:
       - "9443:9443"
     networks:
-      - dockernet~
+      - dockernet
 
   gateway-manager:
     image: docker.wso2.com/apim-pattern6-gateway-manager:2.1.0
