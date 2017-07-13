@@ -13,7 +13,7 @@ services:
       context: ../
       dockerfile: pattern-6/am-analytics/Dockerfile
     volumes:
-      - ./pattern-6/am-analytics/carbon/repository/conf/datasources/analytics-datasources.xml:/mnt/wso2am-analytics-2.1.0/repository/conf/datasources/analytics-datasources.xml
+      - ./am-analytics/carbon/repository/conf/datasources/analytics-datasources.xml:/mnt/wso2am-analytics-2.1.0/repository/conf/datasources/analytics-datasources.xml
     environment:
       - SLEEP=150
     ports:
