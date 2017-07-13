@@ -12,14 +12,14 @@ services:
     build:
       context: ../
       dockerfile: pattern-6/am-analytics/Dockerfile
+    volumes:
+      - ./pattern-6/am-analytics/carbon/repository/conf/datasources/analytics-datasources.xml:/mnt/wso2am-analytics-2.1.0/repository/conf/datasources/analytics-datasources.xml
     environment:
       - SLEEP=150
     ports:
       - "9448:9444"
     networks:
-      - dockernet
-    volumes:
-      - ./pattern-6/keymanager/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml 
+      - dockernet 
   traffic-manager:
     image: docker.wso2.com/apim-pattern6-traffic-manager:2.1.0
     build:
@@ -42,7 +42,6 @@ services:
       - "9443:9443"
     networks:
       - dockernet
-
   gateway-manager:
     image: docker.wso2.com/apim-pattern6-gateway-manager:2.1.0
     build:
