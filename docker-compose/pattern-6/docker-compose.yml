@@ -18,6 +18,8 @@ services:
       - "9448:9444"
     networks:
       - dockernet
+    volumes:
+      - ./pattern-6/keymanager/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml 
   traffic-manager:
     image: docker.wso2.com/apim-pattern6-traffic-manager:2.1.0
     build:
@@ -39,7 +41,8 @@ services:
     ports:
       - "9443:9443"
     networks:
-      - dockernet
+      - dockernet~
+
   gateway-manager:
     image: docker.wso2.com/apim-pattern6-gateway-manager:2.1.0
     build:
