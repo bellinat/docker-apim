@@ -1,3 +1,4 @@
+CREATE Database `stats_db`;
 CREATE Database `apimgtdb`;
 
 USE `apimgtdb`;

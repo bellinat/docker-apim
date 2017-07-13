@@ -1,1 +1,1 @@
-CREATE Database `stats_db`;
+--CREATE Database `stats_db`;
