@@ -1,12 +1,5 @@
 version: '2'
 services:
-  # apim_rdbms:
-  #   image: docker.wso2.com/apim-pattern6-mysql:5.5
-  #   build:
-  #       context: ../
-  #       dockerfile: pattern-6/database/Dockerfile
-  #   environment:
-  #       MYSQL_ROOT_PASSWORD: root
   analytics:
     image: docker.wso2.com/apim-pattern6-am-analytics:2.1.0
     build:
@@ -14,50 +7,71 @@ services:
       dockerfile: pattern-6/am-analytics/Dockerfile
     volumes:
       - ./am-analytics/carbon/repository/conf/datasources/analytics-datasources.xml:/mnt/wso2am-analytics-2.1.0/repository/conf/datasources/analytics-datasources.xml
+      - ./am-analytics/carbon/repository/conf/datasources/stats-datasources.xml:/mnt/wso2am-analytics-2.1.0/repository/conf/datasources/stats-datasources.xml
     environment:
       - SLEEP=150
     ports:
       - "9448:9444"
     networks:
       - dockernet 
+
   traffic-manager:
     image: docker.wso2.com/apim-pattern6-traffic-manager:2.1.0
     build:
       context: ../
       dockerfile: pattern-6/traffic-manager/Dockerfile
+    volumes:
+      - ./traffic-manager/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml
+      - ./traffic-manager/carbon/repository/conf/registry.xml:/mnt/wso2am-2.1.0/repository/conf/registry.xml
     environment:
       - SLEEP=60
     ports:
       - "9447:9443"
     networks:
       - dockernet
+
   keymanager:
     image: docker.wso2.com/apim-pattern6-keymanager:2.1.0
     build:
       context: ../
       dockerfile: pattern-6/keymanager/Dockerfile
+    volumes:
+      - ./keymanager/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml
+      - ./keymanager/carbon/repository/conf/api-manager.xml:/mnt/wso2am-2.1.0/repository/conf/api-manager.xml
+      - ./keymanager/carbon/repository/conf/user-mgt.xml:/mnt/wso2am-2.1.0/repository/conf/user-mgt.xml
     environment:
       - SLEEP=100
     ports:
       - "9443:9443"
     networks:
       - dockernet
+
   gateway-manager:
     image: docker.wso2.com/apim-pattern6-gateway-manager:2.1.0
     build:
       context: ../
       dockerfile: pattern-6/gateway-manager/Dockerfile
+    volumes:
+      - ./gateway-manager/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml
+      - ./gateway-manager/carbon/repository/conf/api-manager.xml:/mnt/wso2am-2.1.0/repository/conf/api-manager.xml
+      - ./gateway-manager/carbon/repository/conf/carbon.xml:/mnt/wso2am-2.1.0/repository/conf/carbon.xml
     environment:
       - SLEEP=150
     ports:
       - "9444:9443"
     networks:
       - dockernet
+
   gateway-worker:
     image: docker.wso2.com/apim-pattern6-gateway-worker:2.1.0
     build:
       context: ../
       dockerfile: pattern-6/gateway-worker/Dockerfile
+    volumes:
+      - ./gateway-worker/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml
+      - ./gateway-worker/carbon/repository/conf/api-manager.xml:/mnt/wso2am-2.1.0/repository/conf/api-manager.xml
+      - ./gateway-worker/carbon/repository/conf/carbon.xml:/mnt/wso2am-2.1.0/repository/conf/carbon.xml
+      - ./gateway-worker/carbon/repository/conf/log4j.properties:/mnt/wso2am-2.1.0/repository/conf/log4j.properties
     environment:
       - SLEEP=200
     ports:
@@ -67,11 +81,20 @@ services:
       - gateway-manager
     networks:
       - dockernet
+
   publisher-store:
     image: docker.wso2.com/apim-pattern6-publisher-store:2.1.0
     build:
       context: ../
       dockerfile: pattern-6/publisher-store/Dockerfile
+    volumes:
+      - ./publisher-store/carbon/repository/conf/datasources/master-datasources.xml:/mnt/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml
+      - ./publisher-store/carbon/repository/conf/api-manager.xml:/mnt/wso2am-2.1.0/repository/conf/api-manager.xml
+      - ./publisher-store/carbon/repository/conf/carbon.xml:/mnt/wso2am-2.1.0/repository/conf/carbon.xml
+      - ./publisher-store/carbon/repository/conf/log4j.properties:/mnt/wso2am-2.1.0/repository/conf/log4j.properties
+      - ./publisher-store/carbon/repository/conf/jndi.properties:/mnt/wso2am-2.1.0/repository/conf/jndi.properties
+      - ./publisher-store/carbon/repository/conf/registry.xml:/mnt/wso2am-2.1.0/repository/conf/registry.xml
+      - ./publisher-store/carbon/repository/conf/user-mgt.xml:/mnt/wso2am-2.1.0/repository/conf/user-mgt.xml
     environment:
       - SLEEP=230
     ports:
